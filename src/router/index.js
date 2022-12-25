@@ -21,6 +21,14 @@ const MainApp = () => {
   );
 };
 
+// const ChildPage = () => {
+//   return (
+//     <Drawer.Navigator>
+//       <Drawer.Screen name="Resep" component={ResepScreen} />
+//     </Drawer.Navigator>
+//   );
+// };
+
 const Router = () => {
   return (
     <Stack.Navigator initialRouteName="MainApp">
@@ -34,6 +42,11 @@ const Router = () => {
         component={MainApp}
         options={{headerShown: false}}
       />
+      {/* <Stack.Screen
+        name="ChildPage"
+        component={ChildPage}
+        options={{headerShown: false}}
+      /> */}
     </Stack.Navigator>
   );
 };
