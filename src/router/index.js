@@ -43,8 +43,8 @@ const Router = () => {
         options={{headerShown: false}}
       />
       {/* <Stack.Screen
-        name="ChildPage"
-        component={ChildPage}
+        name="Resep"
+        component={Resep}
         options={{headerShown: false}}
       /> */}
     </Stack.Navigator>
