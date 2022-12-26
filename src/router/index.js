@@ -5,7 +5,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 // import src page
-import {Splash, Beranda, Kategori, Search, Bookmark} from '../pages';
+import {Splash, Beranda, Kategori, Search, Bookmark, ResepList} from '../pages';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -20,14 +20,6 @@ const MainApp = () => {
     </Tab.Navigator>
   );
 };
-
-// const ChildPage = () => {
-//   return (
-//     <Drawer.Navigator>
-//       <Drawer.Screen name="Resep" component={ResepScreen} />
-//     </Drawer.Navigator>
-//   );
-// };
 
 const Router = () => {
   return (
@@ -47,6 +39,11 @@ const Router = () => {
         component={Resep}
         options={{headerShown: false}}
       /> */}
+      <Stack.Screen
+        name="ResepList"
+        component={ResepList}
+        options={{headerShown: false}}
+      />
     </Stack.Navigator>
   );
 };

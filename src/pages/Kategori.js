@@ -1,4 +1,4 @@
-import React, {useLayoutEffect} from 'react';
+import React from 'react';
 import {
   FlatList,
   Text,
@@ -10,11 +10,11 @@ import {
 import {categories} from '../data/dataArrays';
 import {getNumberOfRecipes} from '../data/MockDataAPI';
 
-export default function CategoriesScreen(props) {
+export default function CategoriesScreen({navigation}) {
   const onPressCategory = item => {
     const title = item.name;
     const category = item;
-    navigation.navigate('RecipesList', {category, title});
+    navigation.navigate('ResepList', {category, title});
   };
 
   const renderCategory = ({item}) => (
