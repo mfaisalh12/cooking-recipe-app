@@ -5,7 +5,15 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 // import src page
-import {Splash, Beranda, Kategori, Search, Bookmark, ResepList} from '../pages';
+import {
+  Splash,
+  Intro,
+  Beranda,
+  Kategori,
+  Search,
+  Bookmark,
+  ResepList,
+} from '../pages';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -23,10 +31,15 @@ const MainApp = () => {
 
 const Router = () => {
   return (
-    <Stack.Navigator initialRouteName="MainApp">
+    <Stack.Navigator initialRouteName="Intro">
       <Stack.Screen
         name="Splash"
         component={Splash}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Intro"
+        component={Intro}
         options={{headerShown: false}}
       />
       <Stack.Screen
