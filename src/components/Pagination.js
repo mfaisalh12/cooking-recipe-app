@@ -11,19 +11,7 @@ const Pagination = ({data, scrollX, index}) => {
 
         const dotWidth = scrollX.interpolate({
           inputRange,
-          outputRange: [12, 30, 12],
-          extrapolate: 'clamp',
-        });
-
-        const opacity = scrollX.interpolate({
-          inputRange,
-          outputRange: [0.2, 1, 0.1],
-          extrapolate: 'clamp',
-        });
-
-        const backgroundColor = scrollX.interpolate({
-          inputRange,
-          outputRange: ['#ccc', '#000', '#ccc'],
+          outputRange: [50, 50, 50],
           extrapolate: 'clamp',
         });
 
@@ -32,8 +20,8 @@ const Pagination = ({data, scrollX, index}) => {
             key={idx.toString()}
             style={[
               styles.dot,
-              {width: dotWidth, backgroundColor},
-              // idx === index && styles.dotActive,
+              {width: dotWidth},
+              idx === index && styles.dotActive,
             ]}
           />
         );
@@ -47,20 +35,19 @@ export default Pagination;
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    bottom: 35,
+    bottom: 0,
     flexDirection: 'row',
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
   },
   dot: {
-    width: 12,
-    height: 12,
+    height: 8,
     borderRadius: 6,
     marginHorizontal: 3,
-    backgroundColor: '#ccc',
+    backgroundColor: '#FFFFFF',
   },
   dotActive: {
-    backgroundColor: '#000',
+    backgroundColor: '#A35709',
   },
 });

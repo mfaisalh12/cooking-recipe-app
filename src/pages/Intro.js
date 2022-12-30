@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   StyleSheet,
   View,
@@ -10,10 +10,31 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-import {BgIntro, Intro1} from '../assets';
+import Slider from '../components/Slider';
+
+import {BgIntro, Intro1, Intro2, Intro3} from '../assets';
+
+const data = [
+  {
+    id: 1,
+    img: Intro1,
+    title: 'Temukan Berbagai Resep Masakan Dengan Mudah',
+  },
+  {
+    id: 2,
+    img: Intro2,
+    title: 'Dapatkan Resep Masakan Di Seluruh Dunia',
+  },
+  {
+    id: 3,
+    img: Intro3,
+    title: 'Simpan Resep Pilihanmu',
+  },
+];
 
 function IntroScreen({navigation}) {
-  const {height, width} = useWindowDimensions();
+  const [count, setCount] = useState(0);
+  const {height} = useWindowDimensions();
   return (
     <View style={{flex: 1}}>
       <StatusBar backgroundColor="#FF8303" barStyle="light-content" />
@@ -24,13 +45,16 @@ function IntroScreen({navigation}) {
             onPress={() => navigation.navigate('Splash')}>
             <Text style={styles.btnTextOrange}>Lewati</Text>
           </TouchableOpacity>
-          <Text style={styles.title}>
+          {/* <Text style={styles.title}>
             Temukan Berbagai Resep Masakan Dengan Mudah
           </Text>
-          <Image source={Intro1} style={styles.imgIntro} />
-
-          <TouchableOpacity style={styles.btnOrange} onPress="">
-            <Text style={styles.btnTextWhite}>Selanjutnya</Text>
+          <Image source={Intro1} style={styles.imgIntro} /> */}
+          <Slider data={data} />
+          <TouchableOpacity
+            style={styles.btnOrange}
+            onPress={() => setCount(count + 1)}
+            disabled={count >= 3 ? true : false}>
+            <Text style={styles.btnTextWhite}>{count}</Text>
           </TouchableOpacity>
         </View>
       </ImageBackground>
