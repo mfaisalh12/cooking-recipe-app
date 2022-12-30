@@ -42,7 +42,7 @@ function IntroScreen({navigation}) {
         <View style={styles.container}>
           <TouchableOpacity
             style={styles.btnWhite}
-            onPress={() => navigation.navigate('Splash')}>
+            onPress={() => navigation.navigate('MainApp')}>
             <Text style={styles.btnTextOrange}>Lewati</Text>
           </TouchableOpacity>
           {/* <Text style={styles.title}>
