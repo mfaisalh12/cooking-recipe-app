@@ -55,17 +55,6 @@ const Desp = ({navigation}) => {
         marginTop: 5,
         backgroundColor: '#E8EAED',
       }}>
-      <View
-        style={{
-          alignItems: 'center',
-          marginBottom: 2,
-          marginTop: 2,
-          flexDirection: 'row',
-        }}>
-        <TouchableOpacity onPress={() => this.props.navigation.pop()}  >
-        <Iconicons name="chevron-back-outline" size={25} color="#900" />
-        </TouchableOpacity>
-      </View>
       <View style={{}}>
         <FlatList
           data={dataTrending}
@@ -95,9 +84,11 @@ const Desp = ({navigation}) => {
               />
               <Text
                 style={{
-                  color: '#212121',
-                  fontsize: 18,
+                  color: '#ff4500',
+                  fontsize: 30,
                   fontWeight: 'bold',
+                  textAlign: 'center',
+                  width: 300
                 }}>
                 {item.namawisata}
               </Text>
@@ -105,6 +96,9 @@ const Desp = ({navigation}) => {
                 style={{
                   color: '#212121',
                   fontsize: 18,
+                  textAlign: 'center',
+                  width: 300,
+                  marginTop: 20
                 }}>
                 {item.resep}
               </Text>
