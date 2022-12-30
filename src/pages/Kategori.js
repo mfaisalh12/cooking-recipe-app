@@ -22,12 +22,14 @@ export default function CategoriesScreen({navigation}) {
       underlayColor="rgba(73,182,77,0.9)"
       onPress={() => onPressCategory(item)}>
       <View style={styles.categoriesItemContainer}>
-        <Image style={styles.categoriesPhoto} source={{uri: item.photo_url}} />
         <Text style={styles.categoriesName}>{item.name}</Text>
+        <Image style={styles.categoriesPhoto} source={{uri: item.photo_url}} />
+        
         <Text style={styles.categoriesInfo}>
           {getNumberOfRecipes(item.id)} recipes
         </Text>
       </View>
+
     </TouchableHighlight>
   );
 
@@ -48,15 +50,16 @@ const styles = StyleSheet.create({
     margin: 10,
     justifyContent: 'center',
     alignItems: 'center',
-    height: 215,
+    height: 225,
     borderColor: '#cccccc',
     borderWidth: 0.5,
     borderRadius: 20,
+    backgroundColor: '#fff'
   },
   categoriesPhoto: {
-    width: '100%',
+    width: '70%',
     height: 155,
-    borderRadius: 20,
+    borderRadius: 0,
     borderBottomLeftRadius: 0,
     borderBottomRightRadius: 0,
     shadowColor: 'blue',
@@ -73,7 +76,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'center',
-    color: '#333333',
+    color: '#FB9300',
     marginTop: 8,
   },
   categoriesInfo: {
