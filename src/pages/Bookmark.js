@@ -82,29 +82,33 @@ const Desp = ({navigation}) => {
                 borderRadius: 8,
                 marginLeft: 5,
               }}>
+              <Text
+                style={{
+                  color: '#A35709',
+                  fontSize: 18,
+                  fontWeight: 'bold',
+                  paddingTop: 8
+                }}>
+                {item.namawisata}
+              </Text>
               <Image
                 source={{uri: item.image}}
                 style={{
                   width: 300,
                   height: 150,
-                  marginBottom: 5,
+                  marginBottom: 8,
                   borderRadius: 3,
-                  marginTop: 5,
+                  marginTop: 10,
                 }}
                 resizemode={'cover'}
               />
               <Text
                 style={{
                   color: '#212121',
-                  fontsize: 18,
-                  fontWeight: 'bold',
-                }}>
-                {item.namawisata}
-              </Text>
-              <Text
-                style={{
-                  color: '#212121',
-                  fontsize: 18,
+                  fontSize: 14,
+                  textAlign:'center',
+                  paddingBottom: 10,
+                  fontWeight: '500'
                 }}>
                 {item.resep}
               </Text>
