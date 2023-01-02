@@ -5,16 +5,12 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
+// import other router
+import BerandaRouter from './BerandaRouter';
+import KategoriRouter from './kategoriRouter';
+
 // import src page
-import {
-  Splash,
-  Intro,
-  Beranda,
-  Kategori,
-  Search,
-  Bookmark,
-  ResepList,
-} from '../pages';
+import {Splash, Intro, Search, Bookmark} from '../pages';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -23,14 +19,10 @@ const MainApp = () => {
   return (
     <Tab.Navigator>
       <Tab.Screen
-        name="Beranda"
-        component={Beranda}
+        name="BerandaRouter"
+        component={BerandaRouter}
         options={{
-          headerTitleAlign: 'center',
-          headerTitleStyle: {
-            color: '#fff',
-          },
-          headerStyle: {backgroundColor: '#FB9300'},
+          headerShown: false,
           tabBarLabel: ({focused}) => (
             <Text
               style={{fontSize: 10, color: focused ? '#A35709' : '#9096A0'}}>
@@ -47,14 +39,10 @@ const MainApp = () => {
         }}
       />
       <Tab.Screen
-        name="Kategori"
-        component={Kategori}
+        name="KategoriRouter"
+        component={KategoriRouter}
         options={{
-          headerTitleAlign: 'center',
-          headerTitleStyle: {
-            color: '#fff',
-          },
-          headerStyle: {backgroundColor: '#FB9300'},
+          headerShown: false,
           tabBarLabel: ({focused}) => (
             <Text
               style={{fontSize: 10, color: focused ? '#A35709' : '#9096A0'}}>
@@ -133,16 +121,6 @@ const Router = () => {
       <Stack.Screen
         name="MainApp"
         component={MainApp}
-        options={{headerShown: false}}
-      />
-      {/* <Stack.Screen
-        name="Resep"
-        component={Resep}
-        options={{headerShown: false}}
-      /> */}
-      <Stack.Screen
-        name="ResepList"
-        component={ResepList}
         options={{headerShown: false}}
       />
     </Stack.Navigator>
