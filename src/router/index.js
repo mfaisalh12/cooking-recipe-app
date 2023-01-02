@@ -21,33 +21,57 @@ const Tab = createBottomTabNavigator();
 const MainApp = () => {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Beranda" component={Beranda} options={{headerTitleAlign: 'center', headerTitleStyle: {
-              color: '#fff',
-            },headerStyle: {backgroundColor: '#FB9300'}}} />
-      <Tab.Screen name="Kategori" component={Kategori} options={{headerTitleAlign: 'center', headerTitleStyle: {
-              color: '#fff',
-            },headerStyle: {backgroundColor: '#FB9300'}}} />
+      <Tab.Screen
+        name="Beranda"
+        component={Beranda}
+        options={{
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            color: '#fff',
+          },
+          headerStyle: {backgroundColor: '#FB9300'},
+        }}
+      />
+      <Tab.Screen
+        name="Kategori"
+        component={Kategori}
+        options={{
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            color: '#fff',
+          },
+          headerStyle: {backgroundColor: '#FB9300'},
+        }}
+      />
       <Tab.Screen name="Search" component={Search} />
-      <Tab.Screen name="Bookmark" component={Bookmark} options={{headerTitleAlign: 'center', headerTitleStyle: {
-              color: '#fff',
-            },headerStyle: {backgroundColor: '#FB9300'}}} />
+      <Tab.Screen
+        name="Bookmark"
+        component={Bookmark}
+        options={{
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            color: '#fff',
+          },
+          headerStyle: {backgroundColor: '#FB9300'},
+        }}
+      />
     </Tab.Navigator>
   );
 };
 
 const Router = () => {
   return (
-    <Stack.Navigator initialRouteName="Intro">
+    <Stack.Navigator initialRouteName="Splash">
       <Stack.Screen
         name="Splash"
         component={Splash}
         options={{headerShown: false}}
       />
-      {/* <Stack.Screen
+      <Stack.Screen
         name="Intro"
         component={Intro}
         options={{headerShown: false}}
-      /> */}
+      />
       <Stack.Screen
         name="MainApp"
         component={MainApp}

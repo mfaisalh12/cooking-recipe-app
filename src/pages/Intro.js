@@ -1,16 +1,17 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {
   StyleSheet,
   View,
   Text,
   Image,
   ImageBackground,
-  useWindowDimensions,
   StatusBar,
   TouchableOpacity,
+  Dimensions,
 } from 'react-native';
+const {width, height} = Dimensions.get('screen');
 
-import Slider from '../components/Slider';
+import Swiper from 'react-native-swiper';
 
 import {BgIntro, Intro1, Intro2, Intro3} from '../assets';
 
@@ -33,29 +34,34 @@ const data = [
 ];
 
 function IntroScreen({navigation}) {
-  const [count, setCount] = useState(0);
-  const {height} = useWindowDimensions();
   return (
-    <View style={{flex: 1}}>
+    <View style={{flex: 1, position: 'relative'}}>
       <StatusBar backgroundColor="#FF8303" barStyle="light-content" />
-      <ImageBackground source={BgIntro} style={{height: height}}>
+      <ImageBackground source={BgIntro} style={{height}}>
         <View style={styles.container}>
           <TouchableOpacity
             style={styles.btnWhite}
             onPress={() => navigation.navigate('MainApp')}>
             <Text style={styles.btnTextOrange}>Lewati</Text>
           </TouchableOpacity>
-          {/* <Text style={styles.title}>
-            Temukan Berbagai Resep Masakan Dengan Mudah
-          </Text>
-          <Image source={Intro1} style={styles.imgIntro} /> */}
-          <Slider data={data} />
-          <TouchableOpacity
-            style={styles.btnOrange}
-            onPress={() => setCount(count + 1)}
-            disabled={count >= 3 ? true : false}>
-            <Text style={styles.btnTextWhite}>{count}</Text>
-          </TouchableOpacity>
+
+          <Swiper
+            showsButtons
+            showsPagination={true}
+            paginationStyle={styles.pagination}
+            loop={false}
+            buttonWrapperStyle={styles.buttonWrapperStyle}
+            prevButton={<Text style={{display: 'none'}}></Text>}
+            nextButton={<Text style={styles.btnNext}>Selanjutnya</Text>}>
+            {data.map((item, key) => {
+              return (
+                <View key={key} style={styles.slider}>
+                  <Text style={styles.title}>{item.title}</Text>
+                  <Image source={item.img} style={styles.imgIntro} />
+                </View>
+              );
+            })}
+          </Swiper>
         </View>
       </ImageBackground>
     </View>
@@ -68,6 +74,7 @@ const styles = StyleSheet.create({
   container: {
     margin: 15,
     flex: 1,
+    maxHeight: height - 100,
   },
   btnWhite: {
     backgroundColor: '#fff',
@@ -82,17 +89,32 @@ const styles = StyleSheet.create({
     color: '#FB9300',
     textAlign: 'center',
   },
-  btnOrange: {
-    position: 'absolute',
-    bottom: 30,
+  btnNext: {
+    bottom: 20,
     backgroundColor: '#FB9300',
-    width: '100%',
+    color: '#fff',
+    width: width - 50,
+    textAlign: 'center',
     paddingVertical: 8,
-    borderRadius: 6,
   },
   btnTextWhite: {
     color: '#fff',
     textAlign: 'center',
+  },
+  slider: {
+    padding: 15,
+
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  buttonWrapperStyle: {
+    backgroundColor: 'transparent',
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  pagination: {
+    bottom: 140,
   },
   title: {
     marginTop: 30,
@@ -102,7 +124,6 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
   imgIntro: {
-    width: '100%',
-    marginTop: 60,
+    marginTop: 30,
   },
 });
