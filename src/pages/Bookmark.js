@@ -12,6 +12,7 @@ import Iconicons from 'react-native-vector-icons/Ionicons';
 import { NavigationContainer } from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
+
 const Desp = ({navigation}) => {
   const [dataTrending, setdataTrending] = useState([
     {
@@ -47,6 +48,7 @@ const Desp = ({navigation}) => {
   ]);
 
   return (
+    
     <View
       style={{
         flex: 1,
