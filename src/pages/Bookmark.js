@@ -12,6 +12,7 @@ import Iconicons from 'react-native-vector-icons/Ionicons';
 import { NavigationContainer } from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
+
 const Desp = ({navigation}) => {
   const [dataTrending, setdataTrending] = useState([
     {
@@ -47,6 +48,7 @@ const Desp = ({navigation}) => {
   ]);
 
   return (
+    
     <View
       style={{
         flex: 1,
@@ -55,17 +57,6 @@ const Desp = ({navigation}) => {
         marginTop: 5,
         backgroundColor: '#E8EAED',
       }}>
-      <View
-        style={{
-          alignItems: 'center',
-          marginBottom: 2,
-          marginTop: 2,
-          flexDirection: 'row',
-        }}>
-        <TouchableOpacity onPress={() => this.props.navigation.pop()}  >
-        <Iconicons name="chevron-back-outline" size={25} color="#900" />
-        </TouchableOpacity>
-      </View>
       <View style={{}}>
         <FlatList
           data={dataTrending}
@@ -104,11 +95,28 @@ const Desp = ({navigation}) => {
               />
               <Text
                 style={{
+
+                  color: '#ff4500',
+                  fontsize: 30,
+                  fontWeight: 'bold',
+                  textAlign: 'center',
+                  width: 300
+                }}>
+                {item.namawisata}
+              </Text>
+              <Text
+                style={{
+                  color: '#212121',
+                  fontsize: 18,
+                  textAlign: 'center',
+                  width: 300,
+                  marginTop: 20,
                   color: '#212121',
                   fontSize: 14,
                   textAlign:'center',
                   paddingBottom: 10,
                   fontWeight: '500'
+
                 }}>
                 {item.resep}
               </Text>
