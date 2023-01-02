@@ -95,7 +95,7 @@ const Desp = ({navigation}) => {
               />
               <Text
                 style={{
-<<<<<<< HEAD
+
                   color: '#ff4500',
                   fontsize: 30,
                   fontWeight: 'bold',
@@ -110,14 +110,13 @@ const Desp = ({navigation}) => {
                   fontsize: 18,
                   textAlign: 'center',
                   width: 300,
-                  marginTop: 20
-=======
+                  marginTop: 20,
                   color: '#212121',
                   fontSize: 14,
                   textAlign:'center',
                   paddingBottom: 10,
                   fontWeight: '500'
->>>>>>> 71b1a2516322d6763d1a6664a2f40d0ccaadca54
+
                 }}>
                 {item.resep}
               </Text>

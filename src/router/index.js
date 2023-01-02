@@ -28,7 +28,6 @@ const MainApp = () => {
               color: '#fff',
             },headerStyle: {backgroundColor: '#FB9300'}}} />
       <Tab.Screen name="Search" component={Search} />
-<<<<<<< HEAD
       <Tab.Screen 
         name="Bookmark" 
         component={Bookmark}
@@ -36,11 +35,10 @@ const MainApp = () => {
           title: 'aku',
         }}
           />
-=======
       <Tab.Screen name="Bookmark" component={Bookmark} options={{headerTitleAlign: 'center', headerTitleStyle: {
               color: '#fff',
             },headerStyle: {backgroundColor: '#FB9300'}}} />
->>>>>>> 71b1a2516322d6763d1a6664a2f40d0ccaadca54
+
     </Tab.Navigator>
   );
 };
