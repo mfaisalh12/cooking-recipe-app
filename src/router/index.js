@@ -16,7 +16,13 @@ const MainApp = () => {
       <Tab.Screen name="Beranda" component={Beranda} />
       <Tab.Screen name="Kategori" component={Kategori} />
       <Tab.Screen name="Search" component={Search} />
-      <Tab.Screen name="Bookmark" component={Bookmark} />
+      <Tab.Screen 
+        name="Bookmark" 
+        component={Bookmark}
+        options={{
+          title: 'aku',
+        }}
+          />
     </Tab.Navigator>
   );
 };
