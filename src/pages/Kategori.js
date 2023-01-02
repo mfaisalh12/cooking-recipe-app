@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'center',
-    color: '#FB9300',
+    color: '#A35709',
     marginTop: 8,
   },
   categoriesInfo: {
