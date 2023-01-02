@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -30,6 +31,19 @@ const MainApp = () => {
             color: '#fff',
           },
           headerStyle: {backgroundColor: '#FB9300'},
+          tabBarLabel: ({focused}) => (
+            <Text
+              style={{fontSize: 10, color: focused ? '#A35709' : '#9096A0'}}>
+              Beranda
+            </Text>
+          ),
+          tabBarIcon: tabInfo => (
+            <Icon
+              name={tabInfo.focused ? 'home' : 'home-outline'}
+              size={28}
+              color={tabInfo.focused ? '#FF8303' : '#9096A0'}
+            />
+          ),
         }}
       />
       <Tab.Screen
@@ -41,9 +55,40 @@ const MainApp = () => {
             color: '#fff',
           },
           headerStyle: {backgroundColor: '#FB9300'},
+          tabBarLabel: ({focused}) => (
+            <Text
+              style={{fontSize: 10, color: focused ? '#A35709' : '#9096A0'}}>
+              Kategori
+            </Text>
+          ),
+          tabBarIcon: tabInfo => (
+            <Icon
+              name={tabInfo.focused ? 'fast-food' : 'fast-food-outline'}
+              size={28}
+              color={tabInfo.focused ? '#FF8303' : '#9096A0'}
+            />
+          ),
         }}
       />
-      <Tab.Screen name="Search" component={Search} />
+      <Tab.Screen
+        name="Search"
+        component={Search}
+        options={{
+          tabBarLabel: ({focused}) => (
+            <Text
+              style={{fontSize: 10, color: focused ? '#A35709' : '#9096A0'}}>
+              Pencarian
+            </Text>
+          ),
+          tabBarIcon: tabInfo => (
+            <Icon
+              name={tabInfo.focused ? 'search' : 'search-outline'}
+              size={28}
+              color={tabInfo.focused ? '#FF8303' : '#9096A0'}
+            />
+          ),
+        }}
+      />
       <Tab.Screen
         name="Bookmark"
         component={Bookmark}
@@ -53,6 +98,19 @@ const MainApp = () => {
             color: '#fff',
           },
           headerStyle: {backgroundColor: '#FB9300'},
+          tabBarLabel: ({focused}) => (
+            <Text
+              style={{fontSize: 10, color: focused ? '#A35709' : '#9096A0'}}>
+              Bookmark
+            </Text>
+          ),
+          tabBarIcon: tabInfo => (
+            <Icon
+              name={tabInfo.focused ? 'bookmarks' : 'bookmarks-outline'}
+              size={28}
+              color={tabInfo.focused ? '#FF8303' : '#9096A0'}
+            />
+          ),
         }}
       />
     </Tab.Navigator>
