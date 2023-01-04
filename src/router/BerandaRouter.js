@@ -15,11 +15,14 @@ const BerandaRouter = () => {
         name="Beranda"
         component={Beranda}
         options={{
-          headerTitleAlign: 'center',
+          headerTitleAlign: 'left',
           headerTitleStyle: {
-            color: '#fff',
+            color: '#FF8303',
+            fontSize: 20,
+            fontWeight: '400',
           },
-          headerStyle: {backgroundColor: '#FB9300'},
+          headerStyle: {backgroundColor: '#fff',},
+          
         }}
       />
     </BerandaStack.Navigator>

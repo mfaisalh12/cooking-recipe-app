@@ -1,4 +1,4 @@
-import React, {useLayoutEffect} from 'react';
+import React, {useLayoutEffect, useState} from 'react';
 import {
   FlatList,
   Text,
@@ -6,6 +6,8 @@ import {
   TouchableHighlight,
   Image,
   StyleSheet,
+  TouchableOpacity,
+  ImageBackground,
 } from 'react-native';
 import {recipes} from '../data/dataArrays';
 import {getCategoryName} from '../data/MockDataAPI';
@@ -17,17 +19,35 @@ const BerandaScreen = props => {
   const onPressRecipe = item => {
     navigation.navigate('MainApp', {}, {item});
   };
+  
+  const [shadowOffsetWidth, setShadowOffsetWidth] = useState(0);
+  const [shadowOffsetHeight, setShadowOffsetHeight] = useState(0);
+  const [shadowRadius, setShadowRadius] = useState(0);
+  const [shadowOpacity, setShadowOpacity] = useState(0.1);
 
   const renderRecipes = ({item}) => (
-    <TouchableHighlight
-      underlayColor="rgba(73,182,77,0.9)"
+    <TouchableOpacity 
       onPress={() => onPressRecipe(item)}>
       <View style={styles.container}>
-        <Image style={styles.photo} source={{uri: item.photo_url}} />
-        <Text style={styles.title}>{item.title}</Text>
-        <Text style={styles.category}>{getCategoryName(item.categoryId)}</Text>
+        <ImageBackground style={styles.photo} source={{uri: item.photo_url}}>
+          <View style={{position:'absolute', bottom:0}}> 
+            <Text style={[styles.title]}>{item.title}</Text>
+            <View
+                style={{
+                  borderColor: '#fff',
+                  borderWidth: 2,
+                  marginLeft: '12.5%',
+                  marginRight: '20%'
+                }}
+              />
+            <Text style={styles.category}>{getCategoryName(item.categoryId)}</Text>
+          </View> 
+        </ImageBackground>
       </View>
-    </TouchableHighlight>
+      
+    
+    </TouchableOpacity >
+    
   );
 
   return (
@@ -35,12 +55,12 @@ const BerandaScreen = props => {
       <FlatList
         vertical
         showsVerticalScrollIndicator={false}
-        numColumns={2}
         data={recipes}
         renderItem={renderRecipes}
         keyExtractor={item => `${item.recipeId}`}
       />
     </View>
+    
   );
 };
 
