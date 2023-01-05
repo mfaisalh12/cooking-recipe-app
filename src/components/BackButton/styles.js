@@ -1,8 +1,7 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   btnContainer: {
-    flex: 1,
     alignItems: 'center',
     borderRadius: 180,
     padding: 8,
@@ -11,16 +10,16 @@ const styles = StyleSheet.create({
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 2
+      height: 2,
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-    elevation: 3
+    elevation: 3,
   },
   btnIcon: {
     height: 17,
-    width: 17
-  }
+    width: 17,
+  },
 });
 
 export default styles;

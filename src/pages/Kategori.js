@@ -4,7 +4,7 @@ import {
   Text,
   View,
   Image,
-  TouchableHighlight,
+  TouchableOpacity,
   StyleSheet,
 } from 'react-native';
 import {categories} from '../data/dataArrays';
@@ -18,19 +18,18 @@ export default function CategoriesScreen({navigation}) {
   };
 
   const renderCategory = ({item}) => (
-    <TouchableHighlight
+    <TouchableOpacity
       underlayColor="rgba(73,182,77,0.9)"
       onPress={() => onPressCategory(item)}>
       <View style={styles.categoriesItemContainer}>
         <Text style={styles.categoriesName}>{item.name}</Text>
         <Image style={styles.categoriesPhoto} source={{uri: item.photo_url}} />
-        
+
         <Text style={styles.categoriesInfo}>
           {getNumberOfRecipes(item.id)} recipes
         </Text>
       </View>
-
-    </TouchableHighlight>
+    </TouchableOpacity>
   );
 
   return (
@@ -54,7 +53,7 @@ const styles = StyleSheet.create({
     borderColor: '#cccccc',
     borderWidth: 0.5,
     borderRadius: 20,
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
   },
   categoriesPhoto: {
     width: '70%',

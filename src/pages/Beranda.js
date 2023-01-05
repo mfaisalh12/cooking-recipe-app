@@ -17,32 +17,30 @@ const BerandaScreen = props => {
   const {navigation} = props;
 
   const onPressRecipe = item => {
-    navigation.navigate('Resep', {}, {item});
+    navigation.navigate('Resep', {item});
   };
-  
+
   const renderRecipes = ({item}) => (
-    <TouchableOpacity 
-      onPress={() => onPressRecipe(item)}>
+    <TouchableOpacity onPress={() => onPressRecipe(item)}>
       <View style={styles.container}>
         <ImageBackground style={styles.photo} source={{uri: item.photo_url}}>
-          <View style={{position:'absolute', bottom:0}}> 
+          <View style={{position: 'absolute', bottom: 0}}>
             <Text style={[styles.title]}>{item.title}</Text>
             <View
-                style={{
-                  borderColor: '#fff',
-                  borderWidth: 2,
-                  marginLeft: '12.5%',
-                  marginRight: '20%'
-                }}
-              />
-            <Text style={styles.category}>{getCategoryName(item.categoryId)}</Text>
-          </View> 
+              style={{
+                borderColor: '#fff',
+                borderWidth: 2,
+                marginLeft: '12.5%',
+                marginRight: '20%',
+              }}
+            />
+            <Text style={styles.category}>
+              {getCategoryName(item.categoryId)}
+            </Text>
+          </View>
         </ImageBackground>
       </View>
-      
-    
-    </TouchableOpacity >
-    
+    </TouchableOpacity>
   );
 
   return (
@@ -55,7 +53,6 @@ const BerandaScreen = props => {
         keyExtractor={item => `${item.recipeId}`}
       />
     </View>
-    
   );
 };
 

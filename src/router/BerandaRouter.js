@@ -21,8 +21,7 @@ const BerandaRouter = () => {
             fontSize: 20,
             fontWeight: '400',
           },
-          headerStyle: {backgroundColor: '#fff',},
-          
+          headerStyle: {backgroundColor: '#fff'},
         }}
       />
       <BerandaStack.Screen
@@ -35,8 +34,7 @@ const BerandaRouter = () => {
             fontSize: 20,
             fontWeight: '400',
           },
-          headerStyle: {backgroundColor: '#fff',},
-          
+          headerStyle: {backgroundColor: '#fff'},
         }}
       />
     </BerandaStack.Navigator>

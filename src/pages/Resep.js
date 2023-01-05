@@ -63,9 +63,8 @@ export default function RecipeScreen(props) {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.carouselContainer}>
-        <View style={styles.carousel}>
-          {/* carousel */}
-          {/* <Swiper
+        {/* <View style={styles.carousel}>
+          <Swiper
             ref={slider1Ref}
             data={item.photosArray}
             renderItem={renderImage}
@@ -80,7 +79,6 @@ export default function RecipeScreen(props) {
             autoplayInterval={3000}
             onSnapToItem={index => setActiveSlide(0)}
           />
-          // pagination
           <Swiper
             dotsLength={item.photosArray.length}
             activeDotIndex={activeSlide}
@@ -92,8 +90,8 @@ export default function RecipeScreen(props) {
             inactiveDotScale={0.6}
             carouselRef={slider1Ref.current}
             tappableDots={!!slider1Ref.current}
-          /> */}
-        </View>
+          />
+        </View> */}
       </View>
       <View style={styles.infoRecipeContainer}>
         <Text style={styles.infoRecipeName}>{item.title}</Text>
