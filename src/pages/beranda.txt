@@ -17,7 +17,7 @@ const BerandaScreen = props => {
   const {navigation} = props;
 
   const onPressRecipe = item => {
-    navigation.navigate('Resep', {}, {item});
+    navigation.navigate('MainApp', {}, {item});
   };
   
   const renderRecipes = ({item}) => (

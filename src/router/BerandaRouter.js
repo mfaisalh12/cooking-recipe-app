@@ -25,6 +25,20 @@ const BerandaRouter = () => {
           
         }}
       />
+      <BerandaStack.Screen
+        name="Resep"
+        component={Resep}
+        options={{
+          headerTitleAlign: 'left',
+          headerTitleStyle: {
+            color: '#FF8303',
+            fontSize: 20,
+            fontWeight: '400',
+          },
+          headerStyle: {backgroundColor: '#fff',},
+          
+        }}
+      />
     </BerandaStack.Navigator>
   );
 };
