@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
     borderRadius: 180,
     padding: 8,
     margin: 10,
-    backgroundColor: 'white',
+    backgroundColor: '#ff8303',
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
   btnIcon: {
     height: 17,
     width: 17,
+    tintColor: 'white',
   },
 });
 

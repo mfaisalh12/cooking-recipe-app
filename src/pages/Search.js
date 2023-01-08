@@ -15,7 +15,7 @@ import {
   getRecipesByCategoryName,
   getRecipesByIngredientName,
 } from '../data/MockDataAPI';
-import {RecipeCard} from '../AppStyles';
+import {CardSearch} from '../components/CardSearch/CardSearch';
 
 export default function SearchScreen(props) {
   const {navigation} = props;
@@ -34,7 +34,7 @@ export default function SearchScreen(props) {
           <TextInput
             style={styles.searchInput}
             onChangeText={handleSearch}
-            value={value}
+            value={value} placeholder="Cari Resep"
           />
           <Pressable onPress={() => handleSearch('')}>
             <Image
@@ -75,7 +75,7 @@ export default function SearchScreen(props) {
       onPress={() => onPressRecipe(item)}>
       <View style={styles.container}>
         <Image style={styles.photo} source={{uri: item.photo_url}} />
-        <Text style={styles.title}>{item.title}</Text>
+        <Text style={[styles.title, {color: 'white', fontWeight: 'bold', fontSize: 18}]}>{item.title}</Text>
         <Text style={styles.category}>{getCategoryName(item.categoryId)}</Text>
       </View>
     </TouchableHighlight>
@@ -96,31 +96,35 @@ export default function SearchScreen(props) {
 }
 
 const styles = StyleSheet.create({
-  container: RecipeCard.container,
-  photo: RecipeCard.photo,
-  title: RecipeCard.title,
-  category: RecipeCard.category,
+  container: CardSearch.container,
+  photo: CardSearch.photo,
+  title: CardSearch.title,
+  category: CardSearch.category,
   btnIcon: {
-    height: 14,
-    width: 14,
+    height: 10,
+    width: 10,
   },
   searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#EDEDED',
-    borderRadius: 10,
-    width: 250,
+    backgroundColor: 'white',
+    borderColor : '#ff8303',
+    borderWidth : 2,
+    borderRadius: 50,
+    width: 355,
+    height : 50,
     justifyContent: 'space-around',
   },
   searchIcon: {
     width: 20,
     height: 20,
-    tintColor: 'grey',
+    tintColor: 'black',
+    marginLeft : 10,
   },
   searchInput: {
-    backgroundColor: '#EDEDED',
+    backgroundColor: 'white',
     color: 'black',
-    width: 180,
-    height: 50,
-  },
+    width: 250,
+    height: 40,
+  }
 });
