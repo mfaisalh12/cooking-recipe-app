@@ -195,7 +195,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: 'bold',
     margin: 10,
-    color: '#FB9300',
+    color: '#FF8303',
   },
   infoDescriptionRecipe: {
     textAlign: 'left',
