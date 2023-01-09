@@ -1,81 +1,69 @@
 import React, {useLayoutEffect} from 'react';
 import {
   FlatList,
-  ScrollView,
   Text,
   View,
   Image,
   TouchableHighlight,
   StyleSheet,
 } from 'react-native';
+<<<<<<< HEAD
 import {
   getIngredientUrl,
   getRecipesByIngredient,
   getCategoryName,
 } from '../data/MockDataAPI';
+=======
+import styles from './styles';
+import {getIngredientName, getAllIngredients} from '../data/MockDataAPI';
+>>>>>>> b27398124ea135fce24efe50413297f4c2076bc4
 
 import {CardSearch} from '../components/CardSearch/CardSearch';
 
-export default function IngredientScreen(props) {
+export default function IngredientsDetailsScreen(props) {
   const {navigation, route} = props;
 
-  const ingredientId = route.params?.ingredient;
-  const ingredientUrl = getIngredientUrl(ingredientId);
-  const ingredientName = route.params?.name;
+  const item = route.params?.ingredients;
+  const ingredientsArray = getAllIngredients(item);
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      title: route.params?.name,
+      title: route.params?.title,
+      headerTitleStyle: {
+        fontSize: 16,
+      },
     });
   }, []);
 
-  const onPressRecipe = item => {
-    navigation.navigate('Recipe', {item});
+  const onPressIngredient = item => {
+    let name = getIngredientName(item.ingredientId);
+    let ingredient = item.ingredientId;
+    navigation.navigate('Ingredient', {ingredient, name});
   };
 
-  const renderRecipes = ({item}) => (
+  const renderIngredient = ({item}) => (
     <TouchableHighlight
       underlayColor="rgba(73,182,77,0.9)"
-      onPress={() => onPressRecipe(item)}>
-      <TouchableHighlight
-        underlayColor="rgba(73,182,77,0.9)"
-        onPress={() => onPressRecipe(item)}>
-        <View style={styles.container}>
-          <Image style={styles.photo} source={{uri: item.photo_url}} />
-          <Text style={styles.title}>{item.title}</Text>
-          <Text style={styles.category}>
-            {getCategoryName(item.categoryId)}
-          </Text>
-        </View>
-      </TouchableHighlight>
+      onPress={() => onPressIngredient(item[0])}>
+      <View style={styles.container}>
+        <Image style={styles.photo} source={{uri: item[0].photo_url}} />
+        <Text style={styles.title}>{item[0].name}</Text>
+        <Text style={{color: 'grey'}}>{item[1]}</Text>
+      </View>
     </TouchableHighlight>
   );
 
   return (
-    <ScrollView style={styles.mainContainer}>
-      <View
-        style={{
-          borderBottomWidth: 0.4,
-          marginBottom: 10,
-          borderBottomColor: 'grey',
-        }}>
-        <Image
-          style={styles.photoIngredient}
-          source={{uri: '' + ingredientUrl}}
-        />
-      </View>
-      <Text style={styles.ingredientInfo}>Recipes with {ingredientName}:</Text>
-      <View>
-        <FlatList
-          vertical
-          showsVerticalScrollIndicator={false}
-          numColumns={2}
-          data={getRecipesByIngredient(ingredientId)}
-          renderItem={renderRecipes}
-          keyExtractor={item => `${item.recipeId}`}
-        />
-      </View>
-    </ScrollView>
+    <View>
+      <FlatList
+        vertical
+        showsVerticalScrollIndicator={false}
+        numColumns={3}
+        data={ingredientsArray}
+        renderItem={renderIngredient}
+        keyExtractor={item => `${item.recipeId}`}
+      />
+    </View>
   );
 }
 
