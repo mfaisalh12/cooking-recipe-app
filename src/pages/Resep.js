@@ -7,6 +7,7 @@ import {
   Dimensions,
   TouchableHighlight,
   StyleSheet,
+  TouchableOpacity,
 } from 'react-native';
 // import Carousel, {Pagination} from 'react-native-snap-carousel';
 import Swiper from 'react-native-swiper';
@@ -63,47 +64,39 @@ export default function RecipeScreen(props) {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.carouselContainer}>
-        {/* <View style={styles.carousel}>
+        <View style={styles.imageContainer}>
+          {/* carousel */}
           <Swiper
-            ref={slider1Ref}
-            data={item.photosArray}
-            renderItem={renderImage}
-            sliderWidth={viewportWidth}
-            itemWidth={viewportWidth}
-            inactiveSlideScale={1}
-            inactiveSlideOpacity={1}
-            firstItem={0}
-            loop={false}
-            autoplay={false}
-            autoplayDelay={500}
-            autoplayInterval={3000}
-            onSnapToItem={index => setActiveSlide(0)}
-          />
-          <Swiper
-            dotsLength={item.photosArray.length}
-            activeDotIndex={activeSlide}
-            containerStyle={styles.paginationContainer}
-            dotColor="rgba(255, 255, 255, 0.92)"
-            dotStyle={styles.paginationDot}
-            inactiveDotColor="white"
-            inactiveDotOpacity={0.4}
-            inactiveDotScale={0.6}
-            carouselRef={slider1Ref.current}
-            tappableDots={!!slider1Ref.current}
-          />
-        </View> */}
+            // showsButtons
+            // showsPagination={true}
+            style={styles.paginationContainer}
+            activeDotColor='#FB9300'
+            loop={true}
+            // buttonWrapperStyle={styles.buttonWrapperStyle}
+            >
+            {item.photosArray.map((val, key) => {
+              return (
+                <View key={key} style={styles.slider}>
+                  <Image source={{uri: val}} style={[styles.image,{borderWidth:1,}]}  />
+                  {console.log(val)}
+                </View>
+              );
+            })}
+          </Swiper>
+          {/* <Image style={[styles.image,{borderWidth:1,}]} source={{uri: item.photo_url}} /> */}
+        </View>
       </View>
       <View style={styles.infoRecipeContainer}>
         <Text style={styles.infoRecipeName}>{item.title}</Text>
         <View style={styles.infoContainer}>
-          <TouchableHighlight
+          <TouchableOpacity
             onPress={() =>
               navigation.navigate('RecipesList', {category, title})
             }>
             <Text style={styles.category}>
               {getCategoryName(item.categoryId).toUpperCase()}
             </Text>
-          </TouchableHighlight>
+          </TouchableOpacity>
         </View>
 
         <View style={styles.infoContainer}>
@@ -135,16 +128,18 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
     flex: 1,
+    // borderWidth:3
   },
   carouselContainer: {
-    minHeight: 250,
-  },
-  carousel: {},
+    minHeight: 370,
+    // borderWidth:1,
 
+  },
+  
   image: {
     ...StyleSheet.absoluteFillObject,
     width: '100%',
-    height: 250,
+    height: 368,
   },
   imageContainer: {
     flex: 1,
@@ -158,6 +153,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     paddingVertical: 8,
     marginTop: 200,
+
   },
   paginationDot: {
     width: 8,
@@ -171,6 +167,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     justifyContent: 'center',
     alignItems: 'center',
+    // borderWidth:1
   },
   infoContainer: {
     flex: 1,
@@ -198,7 +195,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: 'bold',
     margin: 10,
-    color: '#2cd18a',
+    color: '#FB9300',
   },
   infoDescriptionRecipe: {
     textAlign: 'left',
