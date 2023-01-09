@@ -12,7 +12,7 @@ import {
   getIngredientUrl,
   getRecipesByIngredient,
   getCategoryName,
-} from '../../data/MockDataAPI';
+} from '../data/MockDataAPI';
 
 import {CardSearch} from '../components/CardSearch/CardSearch';
 
@@ -100,4 +100,7 @@ const styles = StyleSheet.create({
   photo: CardSearch.photo,
   title: CardSearch.title,
   category: CardSearch.category,
+  mainContainer: {
+    pass
+  }
 });

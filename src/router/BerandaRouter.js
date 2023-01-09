@@ -4,7 +4,7 @@ import {StyleSheet, Text, View, TouchableOpacity, Pressable} from 'react-native'
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Icon2 from 'react-native-vector-icons/Entypo';
 // import src page
-import {Beranda, Resep} from '../pages';
+import {Beranda, Resep, Ingredient} from '../pages';
 
 const BerandaStack = createNativeStackNavigator();
 
@@ -29,14 +29,6 @@ const BerandaRouter = () => {
         component={Resep}
         options={{
           headerShown: true,
-          headerTransparent: {
-            position: 'absolute',
-            backgroundColor: 'transparent',
-            zIndex: 100,
-            top: 0,
-            left: 0,
-            right: 0
-          },
           // headerTitleAlign: 'right',
           // headerTitleStyle: {
           //   color: '#FF8303',
@@ -47,9 +39,10 @@ const BerandaRouter = () => {
           
         }}
       />
-      {/* <BerandaStack.Screen
-      
-      /> */}
+      <BerandaStack.Screen
+        name="Ingredient"
+        component={Ingredient}
+      />
     </BerandaStack.Navigator>
   );
 };

@@ -112,7 +112,7 @@ export default function RecipeScreen(props) {
             onPress={() => {
               let ingredients = item.ingredients;
               let title = 'Ingredients for ' + item.title;
-              navigation.navigate('IngredientsDetails', {ingredients, title});
+              navigation.navigate('Ingredient', {ingredients, title});
             }}
           />
         </View>
