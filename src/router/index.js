@@ -8,6 +8,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 // import other router
 import BerandaRouter from './BerandaRouter';
 import KategoriRouter from './kategoriRouter';
+import SearchRouter from './SearchRouter';
 
 // import src page
 import {Splash, Intro, Search, Bookmark} from '../pages';
@@ -59,9 +60,10 @@ const MainApp = () => {
         }}
       />
       <Tab.Screen
-        name="Search"
-        component={Search}
+        name="SearchRouter"
+        component={SearchRouter}
         options={{
+          headerShown: false,
           tabBarLabel: ({focused}) => (
             <Text
               style={{fontSize: 10, color: focused ? '#A35709' : '#9096A0'}}>

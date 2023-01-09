@@ -4,7 +4,7 @@ import {
   Text,
   View,
   Image,
-  TouchableHighlight,
+  TouchableOpacity,
   Pressable,
   TextInput,
   StyleSheet,
@@ -34,7 +34,8 @@ export default function SearchScreen(props) {
           <TextInput
             style={styles.searchInput}
             onChangeText={handleSearch}
-            value={value} placeholder="Cari Resep"
+            value={value}
+            placeholder="Cari Resep"
           />
           <Pressable onPress={() => handleSearch('')}>
             <Image
@@ -66,19 +67,25 @@ export default function SearchScreen(props) {
   };
 
   const onPressRecipe = item => {
-    navigation.navigate('Recipe', {item});
+    navigation.navigate('Resep', {item});
   };
 
   const renderRecipes = ({item}) => (
-    <TouchableHighlight
+    <TouchableOpacity
       underlayColor="rgba(73,182,77,0.9)"
       onPress={() => onPressRecipe(item)}>
       <View style={styles.container}>
         <Image style={styles.photo} source={{uri: item.photo_url}} />
-        <Text style={[styles.title, {color: 'white', fontWeight: 'bold', fontSize: 18}]}>{item.title}</Text>
+        <Text
+          style={[
+            styles.title,
+            {color: 'white', fontWeight: 'bold', fontSize: 18},
+          ]}>
+          {item.title}
+        </Text>
         <Text style={styles.category}>{getCategoryName(item.categoryId)}</Text>
       </View>
-    </TouchableHighlight>
+    </TouchableOpacity>
   );
 
   return (
@@ -108,23 +115,23 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: 'white',
-    borderColor : '#ff8303',
-    borderWidth : 2,
+    borderColor: '#ff8303',
+    borderWidth: 2,
     borderRadius: 50,
     width: 355,
-    height : 50,
+    height: 50,
     justifyContent: 'space-around',
   },
   searchIcon: {
     width: 20,
     height: 20,
     tintColor: 'black',
-    marginLeft : 10,
+    marginLeft: 10,
   },
   searchInput: {
     backgroundColor: 'white',
     color: 'black',
     width: 250,
     height: 40,
-  }
+  },
 });
