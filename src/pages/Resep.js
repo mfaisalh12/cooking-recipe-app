@@ -20,20 +20,19 @@ import {
 import BackButton from '../components/BackButton/BackButton';
 import ViewIngredientsButton from '../components/ViewIngredientsButton/ViewIngredientsButton';
 
+import axios from 'axios';
+import {API_KEY} from '@env';
+
 const {width: viewportWidth} = Dimensions.get('window');
 
 export default function RecipeScreen(props) {
   const {navigation, route} = props;
+  const [data, setData] = useState();
 
   const item = route.params?.item;
-  const category = getCategoryById(item.categoryId);
-  const title = getCategoryName(category.id);
-
-  const [activeSlide, setActiveSlide] = useState(0);
-
-  const slider1Ref = useRef();
 
   useLayoutEffect(() => {
+    dataAPI();
     navigation.setOptions({
       headerTransparent: 'true',
       headerLeft: () => (
@@ -47,18 +46,22 @@ export default function RecipeScreen(props) {
     });
   }, []);
 
-  const renderImage = ({item}) => (
-    <TouchableHighlight>
-      <View style={styles.imageContainer}>
-        <Image style={styles.image} source={{uri: item}} />
-      </View>
-    </TouchableHighlight>
-  );
+  const dataAPI = async () => {
+    const url = `https://api.spoonacular.com/recipes/${item.id}/information`;
+    const config = {
+      headers: {
+        'x-api-key': API_KEY,
+        'Content-Type': 'application/json',
+      },
+    };
 
-  const onPressIngredient = item => {
-    var name = getIngredientName(item);
-    let ingredient = item;
-    navigation.navigate('Ingredient', {ingredient, name});
+    try {
+      const response = await axios.get(url, config);
+      console.log('Resep dijalankan');
+      setData(response.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -67,34 +70,27 @@ export default function RecipeScreen(props) {
         <View style={styles.imageContainer}>
           {/* carousel */}
           <Swiper
-            // showsButtons
-            // showsPagination={true}
             style={styles.paginationContainer}
-            activeDotColor='#FB9300'
-            loop={true}
-            // buttonWrapperStyle={styles.buttonWrapperStyle}
-            >
-            {item.photosArray.map((val, key) => {
-              return (
-                <View key={key} style={styles.slider}>
-                  <Image source={{uri: val}} style={[styles.image,{borderWidth:1,}]}  />
-                  {console.log(val)}
-                </View>
-              );
-            })}
+            activeDotColor="#FB9300"
+            loop={true}>
+            <View style={styles.slider}>
+              <Image
+                source={{uri: data && data.image}}
+                style={[styles.image, {borderWidth: 1}]}
+              />
+            </View>
           </Swiper>
-          {/* <Image style={[styles.image,{borderWidth:1,}]} source={{uri: item.photo_url}} /> */}
         </View>
       </View>
       <View style={styles.infoRecipeContainer}>
-        <Text style={styles.infoRecipeName}>{item.title}</Text>
+        <Text style={styles.infoRecipeName}>{data && data.title}</Text>
         <View style={styles.infoContainer}>
           <TouchableOpacity
             onPress={() =>
               navigation.navigate('RecipesList', {category, title})
             }>
             <Text style={styles.category}>
-              {getCategoryName(item.categoryId).toUpperCase()}
+              {data && data.cuisines.join(', ')}
             </Text>
           </TouchableOpacity>
         </View>
@@ -104,20 +100,39 @@ export default function RecipeScreen(props) {
             style={styles.infoPhoto}
             source={require('../assets/icons/time.png')}
           />
-          <Text style={styles.infoRecipe}>{item.time} minutes </Text>
+          <Text style={styles.infoRecipe}>
+            {data && data.readyInMinutes} minutes{' '}
+          </Text>
         </View>
 
         <View style={styles.infoContainer}>
           <ViewIngredientsButton
             onPress={() => {
-              let ingredients = item.ingredients;
-              let title = 'Ingredients for ' + item.title;
+              let ingredients = data ? data.extendedIngredients : '';
+              let title = 'Ingredients for ' + data ? data.title : '';
               navigation.navigate('Ingredient', {ingredients, title});
             }}
           />
         </View>
-        <View style={styles.infoContainer}>
-          <Text style={styles.infoDescriptionRecipe}>{item.description}</Text>
+
+        <View style={{marginHorizontal: 20, marginTop: 15}}>
+          <Text style={{fontWeight: 'bold'}}>Step Instructions :</Text>
+          {data &&
+            data.analyzedInstructions[0].steps.map((val, key) => {
+              return (
+                <View
+                  key={key}
+                  style={{
+                    flexDirection: 'row',
+                    marginTop: 2,
+                  }}>
+                  <Text style={{fontWeight: 'bold'}}>{val.number}.</Text>
+                  <Text style={{fontWeight: '600', marginLeft: 10}}>
+                    {val.step}
+                  </Text>
+                </View>
+              );
+            })}
         </View>
       </View>
     </ScrollView>
@@ -128,14 +143,11 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
     flex: 1,
-    // borderWidth:3
   },
   carouselContainer: {
     minHeight: 370,
-    // borderWidth:1,
-
   },
-  
+
   image: {
     ...StyleSheet.absoluteFillObject,
     width: '100%',
@@ -153,7 +165,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     paddingVertical: 8,
     marginTop: 200,
-
   },
   paginationDot: {
     width: 8,
@@ -167,7 +178,6 @@ const styles = StyleSheet.create({
     marginTop: 20,
     justifyContent: 'center',
     alignItems: 'center',
-    // borderWidth:1
   },
   infoContainer: {
     flex: 1,
@@ -200,6 +210,7 @@ const styles = StyleSheet.create({
   infoDescriptionRecipe: {
     textAlign: 'left',
     fontSize: 16,
+    fontWeight: 'bold',
     marginTop: 30,
     margin: 15,
   },

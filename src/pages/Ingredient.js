@@ -4,20 +4,14 @@ import {
   Text,
   View,
   Image,
-  TouchableHighlight,
   StyleSheet,
   Dimensions,
 } from 'react-native';
-// import styles from './styles';
-import {getIngredientName, getAllIngredients} from '../data/MockDataAPI';
-
-import {CardSearch} from '../components/CardSearch/CardSearch';
 
 export default function IngredientsDetailsScreen(props) {
   const {navigation, route} = props;
 
   const item = route.params?.ingredients;
-  const ingredientsArray = getAllIngredients(item);
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -28,19 +22,26 @@ export default function IngredientsDetailsScreen(props) {
     });
   }, []);
 
-  const onPressIngredient = item => {
-    let name = getIngredientName(item.ingredientId);
-    let ingredient = item.ingredientId;
-    navigation.navigate('Ingredient', {ingredient, name});
+  const capitalizeText = text => {
+    const arr = text.split(' ');
+    for (let i = 0; i < arr.length; i++) {
+      arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].slice(1);
+    }
+    const str2 = arr.join(' ');
+    return str2;
   };
 
   const renderIngredient = ({item}) => (
     <View style={styles.container}>
-      <Image style={styles.photo} source={{uri: item[0].photo_url}} />
-      <Text style={styles.title}>{item[0].name}</Text>
-      <Text style={{color: 'grey'}}>{item[1]}</Text>
+      <Image
+        style={styles.photo}
+        source={{
+          uri: `https://spoonacular.com/cdn/ingredients_100x100/${item.image}`,
+        }}
+      />
+      <Text style={styles.title}>{capitalizeText(item.name)}</Text>
+      <Text style={styles.origin}>{item.original}</Text>
     </View>
-
   );
 
   return (
@@ -48,10 +49,10 @@ export default function IngredientsDetailsScreen(props) {
       <FlatList
         vertical
         showsVerticalScrollIndicator={false}
-        numColumns={3}
-        data={ingredientsArray}
+        numColumns={2}
+        data={item}
         renderItem={renderIngredient}
-        keyExtractor={item => `${item.recipeId}`}
+        keyExtractor={item => `${item.id}`}
       />
     </View>
   );
@@ -85,7 +86,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 
-  
   container: {
     flex: 1,
     justifyContent: 'space-around',
@@ -96,35 +96,36 @@ const styles = StyleSheet.create({
     width:
       (SCREEN_WIDTH - (recipeNumColums + 1) * RECIPE_ITEM_MARGIN) /
       recipeNumColums,
-    height: RECIPE_ITEM_HEIGHT + 75,
+    height: RECIPE_ITEM_HEIGHT + 100,
     borderRadius: 20,
     shadowColor: 'black',
-    backgroundColor: '#FF8303',
+    backgroundColor: '#fff',
+    borderColor: '#FF8303',
+    borderWidth: 2,
     position: 'relative',
   },
   photo: {
     width:
       (SCREEN_WIDTH - (recipeNumColums + 1) * RECIPE_ITEM_MARGIN) /
       recipeNumColums,
-    height: RECIPE_ITEM_HEIGHT,
+    height: RECIPE_ITEM_HEIGHT - 20,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
   },
   title: {
     flex: 1,
     fontWeight: 'bold',
-    color: '#ffffff',
-    alignItems: 'center',
+    fontSize: 16,
+    color: '#A35709',
     textAlign: 'center',
-    marginTop: 5,
+    marginTop: 10,
   },
-  category: {
+  origin: {
     flex: 1,
     marginBottom: 10,
-    alignItems: 'center',
-    fontSize: 15,
+    textAlign: 'center',
+    fontSize: 12,
     fontWeight: '400',
-    color: 'white',
-    // borderWidth:1
+    color: '#000',
   },
 });

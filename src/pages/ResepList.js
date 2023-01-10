@@ -9,7 +9,6 @@ import {
   Dimensions,
 } from 'react-native';
 import axios from 'axios';
-import {getRecipes, getCategoryName} from '../data/MockDataAPI';
 const {width, height} = Dimensions.get('window');
 import {API_KEY} from '@env';
 

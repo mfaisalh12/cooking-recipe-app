@@ -3,13 +3,11 @@ import {
   FlatList,
   Text,
   View,
-  TouchableHighlight,
   Image,
   StyleSheet,
   TouchableOpacity,
   ImageBackground,
 } from 'react-native';
-import {recipes} from '../data/dataArrays';
 import {getCategoryName} from '../data/MockDataAPI';
 import {RecipeCard} from '../AppStyles';
 import axios from 'axios';

@@ -1,4 +1,4 @@
-import React, {useEffect, useLayoutEffect, useState} from 'react';
+import React, {useLayoutEffect, useState} from 'react';
 import {
   FlatList,
   Text,
@@ -10,12 +10,6 @@ import {
   StyleSheet,
   Dimensions,
 } from 'react-native';
-import {
-  getCategoryName,
-  getRecipesByRecipeName,
-  getRecipesByCategoryName,
-  getRecipesByIngredientName,
-} from '../data/MockDataAPI';
 import axios from 'axios';
 import {CardSearch} from '../components/CardSearch/CardSearch';
 import {API_KEY} from '@env';
