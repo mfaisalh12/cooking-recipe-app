@@ -14,43 +14,33 @@ const RECIPE_ITEM_MARGIN = 20;
 export const CardSearch = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     alignItems: 'center',
     marginLeft: RECIPE_ITEM_MARGIN,
     marginRight: 5,
-    marginTop: 23,
-    width:
-      (SCREEN_WIDTH - (recipeNumColums + 1) * RECIPE_ITEM_MARGIN) /
-      recipeNumColums,
-    height: RECIPE_ITEM_HEIGHT + 75,
-    borderRadius: 20,
-    shadowColor: 'black',
-    backgroundColor: '#FF8303',
-    position: 'relative',
-  },
-  photo: {
+    marginTop: 12,
+    marginBottom: 10,
     width:
       (SCREEN_WIDTH - (recipeNumColums + 1) * RECIPE_ITEM_MARGIN) /
       recipeNumColums,
     height: RECIPE_ITEM_HEIGHT,
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
+    borderRadius: 12,
+    elevation: 4,
+    shadowColor: '#171717',
+    backgroundColor: '#FF8303',
+  },
+  photo: {
+    width: '100%',
+    height: (RECIPE_ITEM_HEIGHT * 3) / 4,
+    borderTopLeftRadius: 12,
+    borderTopRightRadius: 12,
   },
   title: {
     flex: 1,
     fontWeight: 'bold',
-    color: '#ffffff',
+    color: '#fff',
     alignItems: 'center',
     textAlign: 'center',
     marginTop: 5,
-  },
-  category: {
-    flex: 1,
-    marginBottom: 10,
-    alignItems: 'center',
-    fontSize: 15,
-    fontWeight: '400',
-    color: 'white',
-    // borderWidth:1
   },
 });

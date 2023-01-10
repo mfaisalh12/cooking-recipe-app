@@ -1,4 +1,4 @@
-import React, {useLayoutEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   FlatList,
   Text,
@@ -12,9 +12,34 @@ import {
 import {recipes} from '../data/dataArrays';
 import {getCategoryName} from '../data/MockDataAPI';
 import {RecipeCard} from '../AppStyles';
+import axios from 'axios';
+import {API_KEY} from '@env';
 
 const BerandaScreen = props => {
   const {navigation} = props;
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    dataAPI();
+  }, []);
+
+  const dataAPI = async () => {
+    const url = 'https://api.spoonacular.com/recipes/complexSearch';
+    const config = {
+      headers: {
+        'x-api-key': API_KEY,
+        'Content-Type': 'application/json',
+      },
+    };
+
+    try {
+      const response = await axios.get(url, config);
+      console.log('Beranda ini dijalankan');
+      setData(await response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const onPressRecipe = item => {
     navigation.navigate('Resep', {item});
@@ -23,7 +48,7 @@ const BerandaScreen = props => {
   const renderRecipes = ({item}) => (
     <TouchableOpacity onPress={() => onPressRecipe(item)}>
       <View style={styles.container}>
-        <ImageBackground style={styles.photo} source={{uri: item.photo_url}}>
+        <ImageBackground style={styles.photo} source={{uri: item.image}}>
           <View style={{position: 'absolute', bottom: 0}}>
             <Text style={[styles.title]}>{item.title}</Text>
             <View
@@ -48,9 +73,9 @@ const BerandaScreen = props => {
       <FlatList
         vertical
         showsVerticalScrollIndicator={false}
-        data={recipes}
+        data={data.results}
         renderItem={renderRecipes}
-        keyExtractor={item => `${item.recipeId}`}
+        keyExtractor={item => `${item.id}`}
       />
     </View>
   );

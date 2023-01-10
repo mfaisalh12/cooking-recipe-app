@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   FlatList,
   Text,
@@ -8,21 +8,42 @@ import {
   StyleSheet,
   Dimensions,
 } from 'react-native';
+import axios from 'axios';
 import {getRecipes, getCategoryName} from '../data/MockDataAPI';
 const {width, height} = Dimensions.get('window');
+import {API_KEY} from '@env';
 
 export default function RecipesListScreen(props) {
   const {navigation, route} = props;
+  const [recipesArray, setRecipesArray] = useState([]);
 
-  const item = route?.params?.category;
-  const recipesArray = getRecipes(item.id);
+  const items = route?.params?.category;
 
   useEffect(() => {
     navigation.setOptions({
       title: route.params?.title,
       headerRight: () => <View />,
     });
+    dataAPI();
   }, []);
+
+  const dataAPI = async () => {
+    const url = `https://api.spoonacular.com/recipes/complexSearch?type=${items.param}`;
+    const config = {
+      headers: {
+        'x-api-key': API_KEY,
+        'Content-Type': 'application/json',
+      },
+    };
+
+    try {
+      const response = await axios.get(url, config);
+      console.log('Categori dijalankan');
+      setRecipesArray(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const onPressRecipe = item => {
     navigation.navigate('Resep', {item});
@@ -33,9 +54,9 @@ export default function RecipesListScreen(props) {
       underlayColor="rgba(73,182,77,0.9)"
       onPress={() => onPressRecipe(item)}>
       <View style={styles.container}>
-        <Image style={styles.photo} source={{uri: item.photo_url}} />
+        <Image style={styles.photo} source={{uri: item.image}} />
         <Text style={styles.title}>{item.title}</Text>
-        <Text style={styles.category}>{getCategoryName(item.categoryId)}</Text>
+        <Text style={styles.category}>{route.params?.title}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -46,9 +67,9 @@ export default function RecipesListScreen(props) {
         vertical
         showsVerticalScrollIndicator={false}
         numColumns={2}
-        data={recipesArray}
+        data={recipesArray.results}
         renderItem={renderRecipes}
-        keyExtractor={item => `${item.recipeId}`}
+        keyExtractor={item => `${item.id}`}
       />
     </View>
   );

@@ -8,7 +8,6 @@ import {
   StyleSheet,
 } from 'react-native';
 import {categories} from '../data/dataArrays';
-import {getNumberOfRecipes} from '../data/MockDataAPI';
 
 export default function CategoriesScreen({navigation}) {
   const onPressCategory = item => {
@@ -24,10 +23,6 @@ export default function CategoriesScreen({navigation}) {
       <View style={styles.categoriesItemContainer}>
         <Text style={styles.categoriesName}>{item.name}</Text>
         <Image style={styles.categoriesPhoto} source={{uri: item.photo_url}} />
-
-        <Text style={styles.categoriesInfo}>
-          {getNumberOfRecipes(item.id)} recipes
-        </Text>
       </View>
     </TouchableOpacity>
   );
@@ -68,7 +63,7 @@ const styles = StyleSheet.create({
     },
     shadowRadius: 5,
     shadowOpacity: 1.0,
-    elevation: 3,
+    marginBottom: '6%',
   },
   categoriesName: {
     flex: 1,
@@ -77,9 +72,5 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#A35709',
     marginTop: 8,
-  },
-  categoriesInfo: {
-    marginTop: 3,
-    marginBottom: 5,
   },
 });
