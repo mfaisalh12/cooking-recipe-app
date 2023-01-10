@@ -58,7 +58,7 @@ const BerandaScreen = props => {
               }}
             />
             <Text style={styles.category}>
-              {getCategoryName(item.categoryId)}
+              {/* {getCategoryName(item.categoryId)} */}
             </Text>
           </View>
         </ImageBackground>
