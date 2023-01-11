@@ -1,38 +1,34 @@
-import React, {useLayoutEffect, useRef, useState} from 'react';
+import React, {useEffect, useLayoutEffect, useState} from 'react';
 import {
   ScrollView,
   Text,
   View,
   Image,
   Dimensions,
-  TouchableHighlight,
   StyleSheet,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
-// import Carousel, {Pagination} from 'react-native-snap-carousel';
 import Swiper from 'react-native-swiper';
-
-import {
-  getIngredientName,
-  getCategoryName,
-  getCategoryById,
-} from '../data/MockDataAPI';
-import BackButton from '../components/BackButton/BackButton';
-import ViewIngredientsButton from '../components/ViewIngredientsButton/ViewIngredientsButton';
-
 import axios from 'axios';
 import {API_KEY} from '@env';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+// Component
+import BackButton from '../components/BackButton/BackButton';
+import ViewIngredientsButton from '../components/ViewIngredientsButton/ViewIngredientsButton';
+import BookMarkBtn from '../components/BookMarkBtn';
 
 const {width: viewportWidth} = Dimensions.get('window');
 
 export default function RecipeScreen(props) {
   const {navigation, route} = props;
   const [data, setData] = useState();
+  const [bookmark, setBookmark] = useState(false);
 
   const item = route.params?.item;
 
   useLayoutEffect(() => {
-    dataAPI();
     navigation.setOptions({
       headerTransparent: 'true',
       headerLeft: () => (
@@ -42,8 +38,20 @@ export default function RecipeScreen(props) {
           }}
         />
       ),
-      headerRight: () => <View />,
+      headerRight: () => (
+        <BookMarkBtn
+          name={bookmark ? 'bookmark' : 'bookmark-outline'}
+          onPress={() => {
+            data && setBookmark(prevCheck => !prevCheck);
+            storeData(data);
+          }}
+        />
+      ),
     });
+  });
+
+  useEffect(() => {
+    dataAPI();
   }, []);
 
   const dataAPI = async () => {
@@ -61,6 +69,27 @@ export default function RecipeScreen(props) {
       setData(response.data);
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const storeData = async data => {
+    try {
+      const jsonValue = JSON.stringify({
+        id: data.id,
+        title: data.title,
+        image: data.image,
+        cuisines: data.cuisines,
+        readyInMinutes: data.readyInMinutes,
+        bookmark: true,
+      });
+      if (!bookmark) {
+        await AsyncStorage.setItem(`bookMarkData-${data.id}`, jsonValue);
+        Alert.alert('Success', 'Data berhasil disimpan');
+      }
+      return true;
+    } catch (e) {
+      Alert.alert('Error', 'Something went wrong');
+      return false;
     }
   };
 

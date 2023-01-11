@@ -11,7 +11,7 @@ import KategoriRouter from './kategoriRouter';
 import SearchRouter from './SearchRouter';
 
 // import src page
-import {Splash, Intro, Search, Bookmark} from '../pages';
+import {Splash, Intro, Bookmark} from '../pages';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
